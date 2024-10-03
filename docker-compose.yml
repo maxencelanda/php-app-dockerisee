@@ -1,0 +1,18 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+    env_file: 
+      - .env
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: exemple
+      MYSQL_DATABASE: docker
+    volumes:
+      - ./db_init:/docker-entrypoint-initdb.d
