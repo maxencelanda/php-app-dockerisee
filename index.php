@@ -1,12 +1,12 @@
 <?php
-$dbInfos = "mysql:host=localhost;dbname=epsi;charset=utf8";
 $env = parse_ini_file('.env');
+$dbInfos = "mysql:host=db;dbname=" . $env["DB_NAME"] . ";charset=utf8";
 $dbUser = $env["DB_USER"];
 $dbPassword = $env["DB_PASSWORD"];
 
 try {
     $db = new PDO($dbInfos, $dbUser, $dbPassword);
-    $query = "SELECT * FROM Etudiant";
+    $query = "SELECT * FROM etudiant";
     $etudiantStatement = $db->prepare($query);
     $etudiantStatement->execute();
     $etudiants = $etudiantStatement->fetchAll();
@@ -15,6 +15,5 @@ try {
     }
 } catch(PDOException $e){
     echo $e;
-} 
-
+}
 ?>

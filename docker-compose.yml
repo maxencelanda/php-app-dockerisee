@@ -7,12 +7,12 @@ services:
       - .:/var/www/html
     depends_on:
       - db
-    env_file: 
+    env_file:
       - .env
   db:
     image: mysql:5.7
     environment:
-      MYSQL_ROOT_PASSWORD: exemple
-      MYSQL_DATABASE: docker
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: ${DB_NAME}
     volumes:
       - ./db_init:/docker-entrypoint-initdb.d
